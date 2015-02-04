@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "_default": {
+            "link": "pxlr"
+        }, 
+        "pxlr": {
+            "applicationId": "Vkpq2oBMIwW9UZNKC7allpH0r5opokYORviRnO8Z", 
+            "masterKey": "YGGihZibUmBqp4vViPBRjjK0RmloWs5oY8eHK7Wq"
+        }
+    }
+}
