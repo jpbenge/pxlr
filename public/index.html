@@ -1,9 +1,8 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
-
-  <title>Pxlr</title>
-  <meta name="description" content="Pxlr">
+  <title>pxlr</title>
+  <meta name="description" content="pxlr">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -16,84 +15,28 @@
   <div id="main-content"></div>
   <script id="login-tmpl" type="text/x-handlebars-template">
     <form>
-      <label>Log In</label>
-      <input type="text" placeholder="Username" id="username"/>
-      <input type="password" placeholder="Password" id="password"/>
-      <input type="button" value="Log In" class="login" />
+      <label>Log In</label><br>
+      <input type="text" placeholder="Username" id="username"/><br>
+      <input type="password" placeholder="Password" id="password"/><br>
+      <input type="button" value="Log In" class="login" /><br>
+       Create an account <a href="#signup">here</>
     </form>
   </script>
   <script id="signup-tmpl" type="text/x-handlebars-template">
     <form>
-      <label>Sign Up</label>
-      <input type="text" placeholder="Username" id="username"/>
-      <input type="password" placeholder="Password" id="password"/>
-      <input type="text" placeholder="Email" id="email"/>
-      <input type="button" value="Sign Up" class="signup" />
+      <label>Sign Up</label><br>
+      <input type="text" placeholder="Username" id="username"/><br>
+      <input type="password" placeholder="Password" id="password"/><br>
+      <input type="text" placeholder="Email" id="email"/><br>
+      <input type="button" value="Sign Up" class="signup" /><br>
+      Already have an account? <a href="#login">log in</>
     </form>
   </script>
-  <script type="text/javascript">
-    Parse.initialize("Vkpq2oBMIwW9UZNKC7allpH0r5opokYORviRnO8Z", "PJWGAxUyHLWHspauri9KVk9DhRuGo8D8AkptKvv5");
-
-    var LoginView = Parse.View.extend({
-      template: Handlebars.compile($('#login-tmpl').html()),
-      events: {
-        'click .login' : 'logIn'
-      },
-
-      logIn: function() {
-        var username = $('#username').val();
-        var password = $('#password').val();
-
-        var user = new Parse.User();
-
-        user.set('username', username);
-        user.set('password', password);
-
-        user.logIn().then(function() {
-          console.log('success!');
-        }).fail(function() {
-          console.log('failed.');
-        });
-      },
-
-      render: function() {
-        this.$el.html(this.template());
-        return this;
-      }
-    });
-
-    var SignUpView = Parse.View.extend({
-      template: Handlebars.compile($('#signup-tmpl').html()),
-      events: {
-        'click .signup' : 'signUp'
-      },
-
-      signUp: function() {
-        var username = $('#username').val();
-        var password = $('#password').val();
-        var email = $('#email').val();
-
-        var user = new Parse.User();
-        user.set('username', username);
-        user.set('password', password);
-        user.set('email', email)
-
-        user.signUp().then(function() {
-          console.log('success!');
-        }).fail(function() {
-          console.log('failed!');
-        });
-      },
-
-      render: function() {
-        this.$el.html(this.template());
-        return this;
-      }
-    });
-
-
-    var view = new LoginView();
-    $('#main-content').html(view.render().el);
-  </script>
+  <script type="text/javascript" src="js/models/image.js"></script>
+  <script type="text/javascript" src="js/models/pixelimage.js"></script>
+  <script type="text/javascript" src="js/views/loginview.js"></script>
+  <script type="text/javascript" src="js/views/signupview.js"></script>
+  <script type="text/javascript" src="js/routers/router.js"></script>
+  <script type="text/javascript" src="js/pxlr.js"></script>
 </body>
 </html>
