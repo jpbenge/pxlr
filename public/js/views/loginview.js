@@ -18,7 +18,7 @@ var pxlr = pxlr || {};
       user.set('password', password);
 
       user.logIn().then(function() {
-        console.log('success!');
+        pxlr.Router.navigate('feed', {trigger: true})
       }).fail(function() {
         console.log('failed.');
       });
