@@ -19,7 +19,7 @@ var pxlr = pxlr || {};
       user.set('email', email)
 
       user.signUp().then(function() {
-        console.log('success!');
+        pxlr.Router.navigate('login', {trigger: true});
       }).fail(function() {
         console.log('failed!');
       });
