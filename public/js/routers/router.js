@@ -6,7 +6,8 @@ var pxlr = pxlr || {};
     routes: {
       'login' : 'logIn',
       'signup': 'signUp',
-      'feed' : 'userFeed'
+      'feed' : 'userFeed',
+      'upload':'upload'
     },
     logIn: function() {
       var view = new pxlr.LoginView();
@@ -18,7 +19,10 @@ var pxlr = pxlr || {};
     },
     userFeed : function() {
       $('#main-content').empty();
-      console.log('my feed');
+    },
+    upload: function() {
+      var view = new pxlr.UploadView();
+      $('#main-content').html(view.render().el); 
     }
   });
 
