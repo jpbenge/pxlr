@@ -9,9 +9,14 @@ var pxlr = pxlr || {};
       'feed' : 'userFeed',
       'upload':'upload'
     },
+    initialize: function () {
+      
+    },
     logIn: function() {
       var view = new pxlr.LoginView();
       $('#main-content').html(view.render().el);
+      var header = new pxlr.HeaderView();
+      $('#header-content').html(header.render().el);
     },
     signUp: function() {
       var view = new pxlr.SignUpView();

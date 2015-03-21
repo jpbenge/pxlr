@@ -15,7 +15,7 @@
   <a href="#signup">Sign Up</a>
   <a href="#login">Login</a>
   <a href="#upload">Upload</a>
-
+  <div id = "header-content"></div>
   <div id="main-content"></div>
   <script id="login-tmpl" type="text/x-handlebars-template">
     <form>
@@ -43,11 +43,16 @@
       <input type="button" value="Upload" class="upload-pic" /><br>
     </form>
   </script>
+  <script id="header-tmpl" type="text/x-handlebars-template">
+    <h4>THIS IS THE HEADER</h4>
+    <h4 id="username">{{username}}</h4>
+  </script>
   <script type="text/javascript" src="js/models/image.js"></script>
   <script type="text/javascript" src="js/models/pixelimage.js"></script>
   <script type="text/javascript" src="js/views/loginview.js"></script>
   <script type="text/javascript" src="js/views/signupview.js"></script>
    <script type="text/javascript" src="js/views/uploadview.js"></script>
+   <script type="text/javascript" src="js/views/headerview.js"></script>
   <script type="text/javascript" src="js/routers/router.js"></script>
   <script type="text/javascript" src="js/pxlr.js"></script>
 </body>
