@@ -12,11 +12,9 @@
 </head>
 
 <body>
-  <a href="#signup">Sign Up</a>
-  <a href="#login">Login</a>
-  <a href="#upload">Upload</a>
-  <div id = "header-content"></div>
-  <div id="main-content"></div>
+  <div id ="header"></div>
+  <div id="main-content">
+  </div>
   <script id="login-tmpl" type="text/x-handlebars-template">
     <form>
       <label>Log In</label><br>
@@ -44,15 +42,79 @@
     </form>
   </script>
   <script id="header-tmpl" type="text/x-handlebars-template">
-    <h4>THIS IS THE HEADER</h4>
-    <h4 id="username">{{username}}</h4>
+    <div id="user-bar">
+    	<div class="bar-block">
+    		<div id="current-user">
+    			<h4>{{username}}</h4>
+    		</div>
+    	</div>
+    	<div class="bar-block">
+    		<input type="button" value="Log Out" class="logout" id="header-logout" /><br>
+    	</div>
+    </div>
+  </script>
+  <script id="feed-tmpl" type="text/x-handlebars-template">
+  	<input type='file' / id="new-post-hidden-image-upload">
+	<input id ="new-post-button" type="button" value="Post a New Image" class="new-post" /><br>
+	<div id="feed">
+		<h4>This is the feed</h4>
+    </div>
+  </script>
+  <script id="create-post-tmpl" type="text/x-handlebars-template">
+  	<div id="create-post">
+  		<div id="create-post-image-div">
+  			<img id="create-post-image-preview" src="" alt="image preview">
+  		</div>
+  		<textarea id="create-post-comment" name="comment" form="post-form">Comment</textarea>
+  		<form id="post-form">
+  			<div id="clarity-levels-div">
+  				<input type="number" name="clarity-levels" value="2" min="2" max="6">
+  				<label>Clarity Levels</label>
+  			</div>
+  			<div id = "clarify-image-heading">
+  			<label>Clarify Image:</label>
+  			</div>
+  			<div class="create-post-radio-div create-post-radio-active">
+  				<input type="radio" id="post-type-radio-time" name="postType" value="overTime" checked>
+  				<label>Over Time</label>
+  			</div>
+  			<div class="create-post-radio-div">
+  				<input type="radio" id="post-type-radio-tags" name="postType" value="tags">
+  				<label>When others Guess Tags</label>
+  			</div>
+  			<div class="create-post-radio-div">
+  				<input type="radio" id="post-type-radio-user" name="postType" value="tags">
+  				<label>Only when I Say So</label>
+  			</div>
+  			<div id= "create-post-time-div" class="post-type-div">
+  				<label>Become Completely Clear After</label>
+  				<input type="number" name="clarity-time-days" value="0" min="0" max="30">
+  				<label>Days</label>
+  				<input type="number" name="clarity-time-hours" value="1" min="0" max="23">
+  				<label>hours</label>
+  			</div>
+  			<div id= "create-post-tags-div" class="post-type-div">
+  			<label id="tags-label">Tags</label>
+  			<label id="tags-instructions-label">Type the tag phrase and press enter after each one</label><br>
+  			<input id= "tags-input" type="text" name="tags"><br>
+  			</div>
+  			<div id= "create-post-user-div" class="post-type-div">
+  			<br>
+  			</div>
+  			<input id="submit-post" type="button" value="Create Post">
+  			<input id="cancel-post" type="button" value="Cancel">
+  		</form>
+  	</div>
   </script>
   <script type="text/javascript" src="js/models/image.js"></script>
   <script type="text/javascript" src="js/models/pixelimage.js"></script>
+  <script type="text/javascript" src="js/models/post.js"></script>
   <script type="text/javascript" src="js/views/loginview.js"></script>
   <script type="text/javascript" src="js/views/signupview.js"></script>
    <script type="text/javascript" src="js/views/uploadview.js"></script>
    <script type="text/javascript" src="js/views/headerview.js"></script>
+   <script type="text/javascript" src="js/views/feedview.js"></script>
+   <script type="text/javascript" src="js/views/createpostview.js"></script>
   <script type="text/javascript" src="js/routers/router.js"></script>
   <script type="text/javascript" src="js/pxlr.js"></script>
 </body>

@@ -1,40 +1,127 @@
 body {
     background: #eee;
     text-align: center;
-    padding: 0 25px;
 }
 
-#main {
-    width: 500px;
-    margin: auto;
-    text-align: left;
-    background: white;
-    padding: 50px 60px;
-    border: solid #ddd;
-    border-width: 0 1px 1px 1px;
+h1, h2, h3, h4, h5, h6, p, a, img {
+    margin: 0;
+    padding: 0;
 }
 
-#main h1 {
+#main-content {
+    margin: 20px auto;
+    width: 960px;
+}
+
+#main-content h1 {
     margin-top: 0;
     font-size: 35px;
 }
 
-#main ul {
+#main-content ul {
     padding-left: 20px;
 }
 
-#main .error {
+#main-content .error {
     border: 1px solid red;
     background: #FDEFF0;
     padding: 20px;
 }
 
-#main .success {
+#main-content .success {
     margin-top: 25px;
 }
 
-#main .success code {
+#main-content .success code {
     font-size: 12px;
     color: green;
     line-height: 13px;
+}
+#header {
+    margin: auto;
+}
+#user-bar {
+    background: #bb5511;
+}
+#user-bar .bar-block {
+    display: inline-block;
+    vertical-align: middle;
+    width: 49%;
+    height: 100%;
+    padding: 6px 0;
+}
+
+#current-user {
+    width: 50px;
+    float: left;
+}
+#current-user h4{
+    color: #883322;
+}
+#header-logout {
+    background: #994411;
+    border: none;
+    float: right;
+}
+
+#new-post-hidden-image-upload {
+    display: none;
+}
+#new-post-button {
+    width: 30%;
+}
+
+#feed, #create-post {
+    margin: 20px auto;
+    background: #dedeef;
+    padding: 10px 5px;
+}
+
+#create-post-image-div {
+    margin: 10px auto;
+    padding: 10px;
+    width: 94%;
+    height: 300px;
+    background: #aaa;
+    border: 1px solid black;
+}
+#create-post-image-preview {
+    height: 100%;
+    width: auto;
+    background: #fff;
+}
+#create-post-comment {
+    width: 96%;
+}
+#clarity-levels-div {
+    margin: 12px 0;
+}
+#clarify-image-heading {
+    margin: 12px 0;
+}
+.create-post-radio-div {
+    margin: 0;
+    background: #aaaaff;
+    display: inline;
+    padding: 10px 20px;
+    border-radius: 18px 18px 0 0;
+
+}
+
+.create-post-radio-active {
+    background: #ccccff;
+}
+
+#create-post-time-div, #create-post-tags-div, #create-post-user-div {
+    background: #ccccff;
+    margin: 8px 0;
+    padding: 20px 10px;
+}
+
+#create-post-tags-div, #create-post-user-div {
+    display: none;
+}
+
+#tags-label {
+    font-size: 30px;
 }
