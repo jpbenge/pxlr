@@ -32,6 +32,7 @@ var pxlr = pxlr || {};
       $('#header').html(header.render().el);
       var view = new pxlr.CreatePostView();
       $('#main-content').html(view.render().el);
+      view.updateClarityGraph();
     },
     upload: function() {
       var view = new pxlr.UploadView();

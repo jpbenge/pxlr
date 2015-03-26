@@ -68,7 +68,7 @@
   		<textarea id="create-post-comment" name="comment" form="post-form">Comment</textarea>
   		<form id="post-form">
   			<div id="clarity-levels-div">
-  				<input type="number" name="clarity-levels" value="2" min="2" max="6">
+  				<input id="clarity-levels-selector" type="number" name="clarity-levels" value="2" min="2" max="6">
   				<label>Clarity Levels</label>
   			</div>
   			<div id = "clarify-image-heading">
@@ -88,10 +88,11 @@
   			</div>
   			<div id= "create-post-time-div" class="post-type-div">
   				<label>Become Completely Clear After</label>
-  				<input type="number" name="clarity-time-days" value="0" min="0" max="30">
+  				<input id="clarity-time-days" type="number" name="clarity-time-days" value="0" min="0" max="30">
   				<label>Days</label>
-  				<input type="number" name="clarity-time-hours" value="1" min="0" max="23">
-  				<label>hours</label>
+  				<input id="clarity-time-hours" type="number" name="clarity-time-hours" value="1" min="0" max="23">
+  				<label>hours</label><br>
+          <canvas id="clarity-graph" width="900" height="100"></canvas>
   			</div>
   			<div id= "create-post-tags-div" class="post-type-div">
   			<label id="tags-label">Tags</label>
