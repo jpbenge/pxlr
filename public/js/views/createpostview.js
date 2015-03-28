@@ -14,6 +14,7 @@ var pxlr = pxlr || {};
       'change #clarity-time-days' : 'updateGraphNumbers',
       'change #clarity-time-hours' : 'updateGraphNumbers' 
     },
+    postImage: null,
     initialize: function() {
 
     },
@@ -90,6 +91,11 @@ var pxlr = pxlr || {};
           this.style.display = 'none';
         }
       })
+    },
+    relayImage: function(image)
+    {
+      postImage = image;
+      console.log(postImage);
     },
     createPost: function() {
       console.log("create post");

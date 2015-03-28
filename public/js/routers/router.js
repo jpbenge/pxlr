@@ -10,8 +10,10 @@ var pxlr = pxlr || {};
       'upload':'upload',
       'createPost' : 'createPost'
     },
+    createPostView: null,
+
     initialize: function () {
-      
+      this.on('router:relayImage', this.relayImage);
     },
     logIn: function() {
       var view = new pxlr.LoginView();
@@ -26,13 +28,17 @@ var pxlr = pxlr || {};
       $('#header').html(header.render().el);
       var view = new pxlr.FeedView();
       $('#main-content').html(view.render().el);
+      //view.pixelateScreen();
     },
     createPost: function() {
       var header = new pxlr.HeaderView();
       $('#header').html(header.render().el);
-      var view = new pxlr.CreatePostView();
-      $('#main-content').html(view.render().el);
-      view.updateClarityGraph();
+      createPostView = new pxlr.CreatePostView();
+      $('#main-content').html(createPostView.render().el);
+      createPostView.updateClarityGraph();
+    },
+    relayImage: function(image) {
+      createPostView.relayImage(image);
     },
     upload: function() {
       var view = new pxlr.UploadView();

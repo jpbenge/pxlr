@@ -130,3 +130,10 @@ h1, h2, h3, h4, h5, h6, p, a, img {
 #tags-label {
     font-size: 30px;
 }
+
+#pixelate-screen-canvas {
+    float: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
