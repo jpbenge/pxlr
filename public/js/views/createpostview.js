@@ -15,8 +15,9 @@ var pxlr = pxlr || {};
       'change #clarity-time-hours' : 'updateGraphNumbers' 
     },
     postImage: null,
+    postType: null,
     initialize: function() {
-
+      postType = 0;
     },
     selectTypeTime: function() {
       $.each($(".create-post-radio-div"), function()
@@ -41,6 +42,8 @@ var pxlr = pxlr || {};
           this.style.display = 'none';
         }
       })
+      postType = 0;
+      this.updateGraphNumbers();
     },
     selectTypeTags: function() {
       $.each($(".create-post-radio-div"), function()
@@ -66,6 +69,8 @@ var pxlr = pxlr || {};
           this.style.display = 'none';
         }
       })
+      postType = 1;
+      this.clearGraphNumbers();
     },
     selectTypeUser: function() {
       $.each($(".create-post-radio-div"), function()
@@ -91,6 +96,8 @@ var pxlr = pxlr || {};
           this.style.display = 'none';
         }
       })
+      postType = 2;
+      this.clearGraphNumbers();
     },
     relayImage: function(image)
     {
@@ -99,6 +106,40 @@ var pxlr = pxlr || {};
     },
     createPost: function() {
       console.log("create post");
+      var parseFile = new Parse.File(postImage.name, postImage);
+      
+      parseFile.save(function() {
+          if(Parse.User.current()) {
+            var image = new pxlr.Image();
+            image.set('image',parseFile);
+            image.set('user', Parse.User.current());
+            image.set('pixelation', parseInt($('#clarity-levels-selector').get(0).value));
+            image.save({success: function(savedImage) {
+              var post = new pxlr.Post();
+              console.log($('#create-post-comment').get(0).value);
+              post.set('user', Parse.User.current());
+              console.log($('#create-post-comment').get(0).value);
+              post.set('text', $('#create-post-comment').get(0).value);
+              if (postType == 0)
+              {
+                console.log((parseInt($('#clarity-time-days').get(0).value)*24) + parseInt($('#clarity-time-hours').get(0).value));
+                post.set('decodeTime', (parseInt($('#clarity-time-days').get(0).value)*24) + parseInt($('#clarity-time-hours').get(0).value));
+              }
+              else if (postType == 1)
+              {
+                //TAGS
+              }
+              post.set("image", {"__type":"Pointer","className":"Image","objectId":savedImage.id});
+              post.save({success: function(savedImage) {
+                console.log("Successfully saved the post");
+              }});
+            }});
+          }  
+        }, function(error) {
+          console.log(error);
+        });
+      
+      
     },
 
     cancelPost: function() {
@@ -110,17 +151,17 @@ var pxlr = pxlr || {};
     	var clarityTime = parseInt($('#clarity-time-days').val())* 24 + parseInt($('#clarity-time-hours').val());
     	var canvas = $("#clarity-graph").get(0);
 		var context = canvas.getContext("2d");
-		context.clearRect(149,69,602,22);
+		context.clearRect(149,19,602,22);
 		context.lineWidth = 1;
 		context.strokeStyle = '#000000';
 		context.beginPath();
-			context.strokeRect(149,69,602,22);
+			context.strokeRect(149,19,602,22);
 		context.closePath();
 
 		for (j=0;j<numClarityLevels-1;j++)
 		{	//define current section
 			var sectionRectX = 150+((600/numClarityLevels)*(j));
-			var sectionRectY = 70;
+			var sectionRectY = 20;
 			var sectionRectWidth = (600/numClarityLevels);
 			var sectionRectHeight = 20;
 			var blockXY = 20/(Math.pow(2,(j+1)));
@@ -142,7 +183,7 @@ var pxlr = pxlr || {};
 		//fill in last section
 		context.fillStyle='#8888ff';
 		context.beginPath();
-			context.fillRect(150+((600/numClarityLevels)*(numClarityLevels-1)),70,(600/numClarityLevels),20);
+			context.fillRect(150+((600/numClarityLevels)*(numClarityLevels-1)),20,(600/numClarityLevels),20);
 		context.closePath();
 		//drawLines
 		context.fillStyle='#000000';
@@ -150,13 +191,16 @@ var pxlr = pxlr || {};
 		{
 			var curX = 150+((600/numClarityLevels)*(i));
 			context.beginPath();
-				context.moveTo(curX,70);
-				context.lineTo(curX,90);
+				context.moveTo(curX,20);
+				context.lineTo(curX,40);
 				context.stroke();
 			context.closePath();
 			
 		}
-		this.updateGraphNumbers();
+      if ($("#post-type-radio-time").parent().hasClass('create-post-radio-active'))
+      {
+        this.updateGraphNumbers();
+      }
     },
 
     updateGraphNumbers: function() {
@@ -164,7 +208,7 @@ var pxlr = pxlr || {};
     	var clarityTime = parseInt($('#clarity-time-days').val())* 24 + parseInt($('#clarity-time-hours').val());
     	var canvas = $("#clarity-graph").get(0);
 		var context = canvas.getContext("2d");
-    	context.clearRect(0,0,900,68);
+    	context.clearRect(0,0,900,18);
     	context.fillStyle='#000000';
     	for (k=1;k<=numClarityLevels;k++)
 		{
@@ -172,11 +216,17 @@ var pxlr = pxlr || {};
 			var curTime = 0 + (k*(clarityTime / numClarityLevels))
 			
 			context.beginPath();
-				context.fillText((eval(curTime).toFixed(2).replace(/\.?0+$/,"")).toString()+" hours",curX-24,60);
+				context.fillText((eval(curTime).toFixed(2).replace(/\.?0+$/,"")).toString()+" hours",curX-24,10);
 			context.closePath();
 		}
     },
-
+    clearGraphNumbers : function() {
+      var numClarityLevels = $('#clarity-levels-selector').val();
+      var clarityTime = parseInt($('#clarity-time-days').val())* 24 + parseInt($('#clarity-time-hours').val());
+      var canvas = $("#clarity-graph").get(0);
+      var context = canvas.getContext("2d");
+      context.clearRect(0,0,900,18);
+    },
     render: function() {
       this.$el.html(this.template());
       return this;
