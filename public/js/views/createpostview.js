@@ -147,7 +147,7 @@ var pxlr = pxlr || {};
     },
 
     updateClarityGraph: function() {
-    	var numClarityLevels = $('#clarity-levels-selector').val();
+    	var numClarityLevels = parseInt($('#clarity-levels-selector').val())+1;
     	var clarityTime = parseInt($('#clarity-time-days').val())* 24 + parseInt($('#clarity-time-hours').val());
     	var canvas = $("#clarity-graph").get(0);
 		var context = canvas.getContext("2d");
@@ -204,7 +204,7 @@ var pxlr = pxlr || {};
     },
 
     updateGraphNumbers: function() {
-    	var numClarityLevels = $('#clarity-levels-selector').val();
+    	var numClarityLevels = parseInt($('#clarity-levels-selector').val())+1;
     	var clarityTime = parseInt($('#clarity-time-days').val())* 24 + parseInt($('#clarity-time-hours').val());
     	var canvas = $("#clarity-graph").get(0);
 		var context = canvas.getContext("2d");
