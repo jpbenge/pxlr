@@ -4,6 +4,7 @@ Parse.Cloud.beforeSave("Image", function(request, response) {
   var PixelImage = Parse.Object.extend('PixelImage');
   var imgArray = [];
   var promises = [];
+  var lastScaledData = '';
   for (var i = 0;i<request.object.get('pixelation');i++)
     {
       var p = new Parse.Promise();
@@ -16,7 +17,7 @@ Parse.Cloud.beforeSave("Image", function(request, response) {
     }).then(function(response) {
       // Create image object
       var bufferImage = new Image();
-      console.log('BUFFER LENGTH :: ' + response.buffer.length);
+      //console.log('BUFFER LENGTH :: ' + response.buffer.length);
       return bufferImage.setData(response.buffer);
     }).then(function(bufferImage)
     {
@@ -24,16 +25,28 @@ Parse.Cloud.beforeSave("Image", function(request, response) {
       {
         var newWidth = (bufferImage.width()*(0.01))*Math.pow(2,i);
         var newHeight = (bufferImage.height()*(0.01))*Math.pow(2,i);
+        console.log('IMAGE :: ' + JSON.stringify(bufferImage));
         bufferImage.scale({width: newWidth, height: newHeight})
-        .then(function(bufferImage)
+        .then(function(scaledImage)
         {
-          var pixelImage = new PixelImage();
-          console.log(bufferImage.width());
-          var bufferBase64 = bufferImage.data().toString("base64");
+        	console.log(scaledImage.width());
+          return scaledImage.data();
+      	}).then(function(scaledData)
+        {
+        	if (scaledData.toString("base64") == lastScaledData)
+        	{
+        		console.log('THEY ARE THE SAME, I HATE ASYNC CODEING');
+        	}
+        	lastScaledData = scaledData.toString("base64");
+        	//console.log('SCALED ++ ' + JSON.stringify(scaledData));
+          console.log(scaledData.toString("base64"));
+          var scaledBase64 = scaledData.toString("base64");
           //pixelImage.set('image',bufferImage);
-          var parseFile = new Parse.File(request.object.get('image').name(), {base64: bufferBase64});
+
+          var parseFile = new Parse.File(counter+request.object.get('image').name(), {base64: scaledBase64});
           return parseFile.save();
         }).then (function(savedFile) {
+          var pixelImage = new PixelImage();
           pixelImage.set('image',savedFile);
           imgArray[counter] = pixelImage;
           promises[counter].resolve();
