@@ -18,7 +18,6 @@ var pxlr = pxlr || {};
       if (user)
       {
         var userInfo = user.toJSON();
-        console.log(userInfo);
         this.$el.html(this.template(userInfo));
         return this;
       }
