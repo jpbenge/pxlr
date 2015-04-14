@@ -113,7 +113,7 @@ var pxlr = pxlr || {};
             var image = new pxlr.Image();
             image.set('image',parseFile);
             image.set('user', Parse.User.current());
-            image.set('pixelation', parseInt($('#clarity-levels-selector').get(0).value));
+            image.set('numPixelImages', parseInt($('#clarity-levels-selector').get(0).value));
             image.save({success: function(savedImage) {
               var post = new pxlr.Post();
               console.log($('#create-post-comment').get(0).value);
